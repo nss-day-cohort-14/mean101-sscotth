@@ -19,7 +19,8 @@
   },
   "homepage": "https://github.com/nss-day-cohort-14/mean101-sscotth#readme",
   "dependencies": {
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "mongoose": "^4.6.1"
   },
   "devDependencies": {
     "bower": "^1.7.9"
