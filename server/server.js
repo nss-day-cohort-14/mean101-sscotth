@@ -1,5 +1,6 @@
 'use strict'
 
+const { json } = require('body-parser')
 const express = require('express')
 const mongoose = require('mongoose')
 
@@ -8,6 +9,7 @@ const MONGODB_URL = process.env.MONGODB_URL || 'mongodb://localhost:27017/meanch
 const PORT = process.env.PORT || 3000
 
 app.use(express.static('client'))
+app.use(json())
 
 app.get('/api/title', (req, res) =>
   res.json({ title: 'MEAN Chat' })
@@ -22,6 +24,13 @@ app.get('/api/messages', (req, res, err) =>
   Message
     .find()
     .then(messages => res.json({ messages }))
+    .catch(err)
+)
+
+app.post('/api/messages', (req, res, err) =>
+  Message
+    .create(req.body)
+    .then(msg => res.json(msg))
     .catch(err)
 )
 
