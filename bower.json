@@ -1,0 +1,20 @@
+{
+  "name": "mean101-sscotth",
+  "description": "",
+  "main": "server/server.js",
+  "authors": [
+    "Scott Humphries <npm@sscotth.io> (https://sscotth.io/)"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/nss-day-cohort-14/mean101-sscotth",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.8"
+  }
+}
