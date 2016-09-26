@@ -1,0 +1,24 @@
+{
+  "name": "mean101-sscotth",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nss-day-cohort-14/mean101-sscotth.git"
+  },
+  "keywords": [],
+  "author": "Scott Humphries <npm@sscotth.io> (https://sscotth.io/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nss-day-cohort-14/mean101-sscotth/issues"
+  },
+  "homepage": "https://github.com/nss-day-cohort-14/mean101-sscotth#readme",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
+}
