@@ -7,12 +7,11 @@
   <body>
     <div ng-app="mean101">
       <div class="container">
-        <div ng-controller="main">
-          <h1>{{title}}</h1>
-        </div>
+        <div ng-view></div>
       </div>
     </div>
     <script src="/lib/angular/angular.min.js"></script>
+    <script src="/lib/angular-route/angular-route.min.js"></script>
     <script src="/app/main.js"></script>
   </body>
 </html>
