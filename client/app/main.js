@@ -20,4 +20,10 @@ angular
         $scope.title = title
       )
   })
-  .controller('ChatCtrl', function ($scope) {})
+  .controller('ChatCtrl', function ($scope, $http) {
+    $http
+      .get('/api/messages')
+      .then(({ data: { messages }}) =>
+        $scope.messages = messages
+      )
+  })
