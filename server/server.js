@@ -30,7 +30,7 @@ app.get('/api/messages', (req, res, err) =>
 app.post('/api/messages', (req, res, err) =>
   Message
     .create(req.body)
-    .then(msg => res.json(msg))
+    .then(msg => res.status(201).json(msg))
     .catch(err)
 )
 
