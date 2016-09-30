@@ -35,7 +35,10 @@ app.get('/api/messages', (req, res, err) =>
 app.post('/api/messages', (req, res, err) =>
   Message
     .create(req.body)
-    .then(msg => res.status(201).json(msg))
+    .then(msg => {
+      io.emit('getNewMessage', msg)
+      res.status(201).json(msg)
+    })
     .catch(err)
 )
 
@@ -58,5 +61,11 @@ mongoose.connect(MONGODB_URL, () =>
 
 io.on('connection', socket => {
   socket.on('disconnect', () => console.log(`Disconnected socket: ${socket.id}`))
+  socket.on('postMessage', msg => {
+    Message
+      .create(msg)
+      .then(msg => io.emit('getNewMessage', msg))
+      .catch(err => socket.emit('error', err))
+  })
   console.log(`New socket: ${socket.id}`)
 })
