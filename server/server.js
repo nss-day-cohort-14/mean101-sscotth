@@ -34,6 +34,14 @@ app.post('/api/messages', (req, res, err) =>
     .catch(err)
 )
 
+app.use('/api', (req, res) =>
+  res.status(404).send({ code: 404, status: 'Not Found' })
+)
+
+app.use((req, res) =>
+  res.sendFile(process.cwd() + '/client/index.html')
+)
+
 mongoose.Promise = Promise
 mongoose.connect(MONGODB_URL, () =>
   app.listen(PORT, () => console.log(`Listening on port: ${PORT}`))
