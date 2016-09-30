@@ -32,15 +32,7 @@ app.get('/api/messages', (req, res, err) =>
     .catch(err)
 )
 
-app.post('/api/messages', (req, res, err) =>
-  Message
-    .create(req.body)
-    .then(msg => {
-      io.emit('getNewMessage', msg)
-      res.status(201).json(msg)
-    })
-    .catch(err)
-)
+app.post('/api/messages', createMessage)
 
 app.use('/api', (req, res) =>
   res.status(404).send({ code: 404, status: 'Not Found' })
@@ -61,11 +53,21 @@ mongoose.connect(MONGODB_URL, () =>
 
 io.on('connection', socket => {
   socket.on('disconnect', () => console.log(`Disconnected socket: ${socket.id}`))
-  socket.on('postMessage', msg => {
-    Message
-      .create(msg)
-      .then(msg => io.emit('getNewMessage', msg))
-      .catch(err => socket.emit('error', err))
-  })
+  socket.on('postMessage', createMessage)
   console.log(`New socket: ${socket.id}`)
 })
+
+function createMessage (req, res, next) {
+  const msg = req.body || req
+  console.log(msg)
+  Message
+    .create(msg)
+    .then(msg => {
+      io.emit('getNewMessage', msg)
+      res && res.status(201).json(msg)
+    })
+    .catch(err => {
+      io.emit('error', err)
+      next(err)
+    })
+}
